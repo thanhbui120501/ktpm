@@ -27,6 +27,12 @@ namespace Eshop
         {
             services.AddControllersWithViews();
             services.AddDbContext<EshopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Eshoper")));
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(ses =>
+            {
+                ses.IdleTimeout = new TimeSpan(7, 0, 0, 0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,13 +50,17 @@ namespace Eshop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+            );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

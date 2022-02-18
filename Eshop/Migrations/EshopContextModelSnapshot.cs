@@ -15,16 +15,16 @@ namespace Eshop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Eshop.Models.Account", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -61,12 +61,12 @@ namespace Eshop.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Cart", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
@@ -86,12 +86,12 @@ namespace Eshop.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Invoice", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Invoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
@@ -121,12 +121,12 @@ namespace Eshop.Migrations
                     b.ToTable("Invoices");
                 });
 
-            modelBuilder.Entity("Eshop.Models.InvoiceDetail", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.InvoiceDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("InvoiceId")
                         .HasColumnType("int");
@@ -149,12 +149,12 @@ namespace Eshop.Migrations
                     b.ToTable("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Product", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -189,12 +189,12 @@ namespace Eshop.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Eshop.Models.ProductType", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.ProductType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -208,15 +208,15 @@ namespace Eshop.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Cart", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Cart", b =>
                 {
-                    b.HasOne("Eshop.Models.Account", "Account")
+                    b.HasOne("Eshop.Areas.Admin.Models.Account", "Account")
                         .WithMany("Carts")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Eshop.Models.Product", "Product")
+                    b.HasOne("Eshop.Areas.Admin.Models.Product", "Product")
                         .WithMany("Carts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -227,9 +227,9 @@ namespace Eshop.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Invoice", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Invoice", b =>
                 {
-                    b.HasOne("Eshop.Models.Account", "Account")
+                    b.HasOne("Eshop.Areas.Admin.Models.Account", "Account")
                         .WithMany("Invoices")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -238,15 +238,15 @@ namespace Eshop.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("Eshop.Models.InvoiceDetail", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.InvoiceDetail", b =>
                 {
-                    b.HasOne("Eshop.Models.Invoice", "Invoice")
+                    b.HasOne("Eshop.Areas.Admin.Models.Invoice", "Invoice")
                         .WithMany("InvoiceDetails")
                         .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Eshop.Models.Product", "Product")
+                    b.HasOne("Eshop.Areas.Admin.Models.Product", "Product")
                         .WithMany("InvoiceDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -257,9 +257,9 @@ namespace Eshop.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Product", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Product", b =>
                 {
-                    b.HasOne("Eshop.Models.ProductType", "ProductType")
+                    b.HasOne("Eshop.Areas.Admin.Models.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,26 +268,26 @@ namespace Eshop.Migrations
                     b.Navigation("ProductType");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Account", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Account", b =>
                 {
                     b.Navigation("Carts");
 
                     b.Navigation("Invoices");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Invoice", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Invoice", b =>
                 {
                     b.Navigation("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("Eshop.Models.Product", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.Product", b =>
                 {
                     b.Navigation("Carts");
 
                     b.Navigation("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("Eshop.Models.ProductType", b =>
+            modelBuilder.Entity("Eshop.Areas.Admin.Models.ProductType", b =>
                 {
                     b.Navigation("Products");
                 });
