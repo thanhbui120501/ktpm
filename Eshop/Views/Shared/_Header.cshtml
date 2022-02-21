@@ -1,7 +1,18 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@{
+    string username;
+    if (ViewBag.username != null)
+    {
+        username = ViewBag.username;
+    }
+    else
+        username = "Khách";
+    ViewData["Title"] = "Admin";
+
+    
+}
 <div class="header" style="margin-bottom:20px">
     <div class="header-top">
         <div class="container">
@@ -29,21 +40,68 @@
 
             <div class="col-sm-4 header-left">
                 <p class="log">
-                    <a href="account.html">Login</a>
-                    <span>or</span><a href="account.html">Signup</a>
+                    @if (ViewBag.username != null)
+                    {
+                        <a asp-controller="Home" asp-action="Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Home" asp-action="Login">Login</a>
+                    }
                 </p>
-                <div class="cart box_1">
-                    <a href="checkout.html">
-                        <h3>
-                            <div class="total">
-                                <span class="simpleCart_total"></span>
-                            </div>
-                            <img src="~/images/cart.png" alt="" />
-                        </h3>
-                    </a>
-                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                <p class="log">
+                    @if (ViewBag.username != null)
+                    {
+                        <a asp-controller="Accounts" asp-action="Detail" asp-route-id="@ViewBag.id">Tài khoản @username</a>
+                    }
+                    else
+                    {
+                        <a>Khách hàng vui lòng đăng nhập</a>
+                    }
+                </p>
+                @if (ViewBag.username != null)
+                {
+                    <div class="cart box_1">
+                        <a asp-controller="Cart" asp-action="Cart">
+                            <h3>
+                                <div class="total">
+                                    <span class="simpleCart_total"></span>
+                                </div>
+                                <img src="~/images/cart.png" alt="" />
+                            </h3>
+                        </a>
+                        <p>
+                            @if (@ViewBag.soluong == 0)
+                            {
+                                <a asp-controller="Cart" asp-action="Cart" class="simpleCart_empty">Empty Cart</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Cart" asp-action="Cart" class="simpleCart_empty">@ViewBag.soluong<span> sản phẩm</span></a>
+                            }
 
-                </div>
+                        </p>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="cart box_1">
+                        <a asp-controller="Home" asp-action="Login">
+                            <h3>
+                                <div class="total">
+                                    <span class="simpleCart_total"></span>
+                                </div>
+                                <img src="~/images/cart.png" alt="" />
+                            </h3>
+                        </a>
+                        <p>
+                            <a asp-controller="Home" asp-action="Login" class="simpleCart_empty">Empty Cart</a>
+                        </p>
+
+                    </div>
+                }
+
                 <div class="clearfix"> </div>
             </div>
             <div class="clearfix"> </div>
@@ -52,7 +110,15 @@
     <div class="container">
         <div class="head-top">
             <div class="col-sm-2 number">
-                <span><i class="glyphicon glyphicon-phone"></i>085 596 234</span>
+                @if (ViewBag.username != null)
+                {
+                    <span><i>Xin chào @username</i></span>
+                }
+                else
+                {
+                    <span><i>Khách hàng</i></span>
+                }
+                
             </div>
             <div class="col-sm-8 h_menu4">
                 <ul class="memenu skyblue">
@@ -176,7 +242,7 @@
                         </div>
                     </li>
                     <li><a href="typo.html">PC Gaming</a></li>
-                    
+
                 </ul>
             </div>
             <div class="col-sm-2 search">
@@ -198,20 +264,20 @@
                 </div>
             </div>
             <script>
-						$(document).ready(function() {
-						$('.popup-with-zoom-anim').magnificPopup({
-							type: 'inline',
-							fixedContentPos: false,
-							fixedBgPos: true,
-							overflowY: 'auto',
-							closeBtnInside: true,
-							preloader: false,
-							midClick: true,
-							removalDelay: 300,
-							mainClass: 'my-mfp-zoom-in'
-						});
+                $(document).ready(function () {
+                    $('.popup-with-zoom-anim').magnificPopup({
+                        type: 'inline',
+                        fixedContentPos: false,
+                        fixedBgPos: true,
+                        overflowY: 'auto',
+                        closeBtnInside: true,
+                        preloader: false,
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'my-mfp-zoom-in'
+                    });
 
-						});
+                });
             </script>
             <!---->
         </div>

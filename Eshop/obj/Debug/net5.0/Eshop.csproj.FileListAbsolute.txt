@@ -188,3 +188,9 @@ D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Areas\Admin\Views\Admin\Dashboar
 D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Shared\_Layout1.cshtml.g.cs
 D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Shared\_Header.cshtml.g.cs
 D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Shared\_Footer.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Shared\_Script.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Products\Detail.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Cart\Cart.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Accounts\Detail.cshtml.g.cs
+D:\DoAn_KTPM\Eshop\Eshop\obj\Debug\net5.0\Razor\Views\Accounts\Edit.cshtml.g.cs

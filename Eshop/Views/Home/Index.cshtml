@@ -10,9 +10,17 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-
+@{
+    string username;
+    if (ViewBag.username != null)
+    {
+        username = ViewBag.username;
+    }
+    else
+        username = "Khách";
+    ViewData["Title"] = "Admin";
+}
 @model IEnumerable<Eshop.Areas.Admin.Models.Product>
-
 <!--banner-->
 <div class="banner">
     <div class="col-sm-3 banner-mat">
@@ -57,13 +65,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 {
                     <div class="col-md-3 col-md2">
                         <div class="col-md1 simpleCart_shelfItem">
-                            <a href="single.html">
+                            <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">
                                 <img style=" max-width:200px ; max-height:300px" class="img-responsive" src="~/image/product/@item.Image" alt="" />
                             </a>
-                            <h3><a href="single.html" style="text-align:justify">@item.Name</a></h3>
+                            <h3><a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id" style="text-align:justify">@item.Name</a></h3>
                             <div class="price">
                                 <h5 class="item_price">@Html.DisplayFor(modelItem => item.Price)</h5>
-                                <a href="#" class="item_add">Add To Cart</a>
+                                @if (ViewBag.username != null)
+                                {
+                                    <a asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@item.Id" class="item_add">Add to cart</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Home" asp-action="Login" class="item_add">Add to card</a>
+                                }
+
                                 <div class="clearfix"> </div>
                             </div>
                         </div>

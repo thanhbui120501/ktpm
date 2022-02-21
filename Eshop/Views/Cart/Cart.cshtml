@@ -1,0 +1,44 @@
+﻿@*ss
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int Tong(int price,int soluong)
+    {
+        return price * soluong;
+    }
+}
+@model IEnumerable<Eshop.Areas.Admin.Models.Cart>
+
+<div class="container">
+    <div class="check-out">
+        <h1>Giỏ hàng</h1>
+        <table>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Gía bán</th>
+                <th>Phí giao hàng</th>
+                <th>Tổng tiền</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="ring-in">
+                        <a href="single.html" class="at-in"><img src="~/image/product/@item.Product.Image" class="img-responsive" alt=""></a>
+                        <div class="sed">
+                            <h5>@item.Product.Name</h5>
+                            <p>@item.Product.Description </p>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td>@Html.DisplayFor(ModelItem => item.Product.Price)</td>
+                    <td>FREE SHIPPING</td>                   
+                    <td>@Tong(item.Product.Price,item.Quantity)</td>
+                </tr>
+            }            
+        </table>
+        <a href="#" class=" to-buy">Thanh toán</a>
+        <div class="clearfix"> </div>
+    </div>
+</div>
